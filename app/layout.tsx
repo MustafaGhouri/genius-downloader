@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import {Inter,Caveat,Questrial } from "next/font/google";
 import  localFont  from "next/font/local";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -37,7 +39,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable}  ${adieu.className} ${caveat.variable} ${questrial.variable} antialiased`}
       >
+        <Header/>
         {children}
+        <Footer/>
       </body>
     </html>
   );

@@ -2,84 +2,71 @@ import Image from "next/image";
 
 const ReelSection = () => {
   return (
-    <section className="relative bg-orange-600 bg-[url('/images/reel-section.png')] bg-no-repeat bg-cover w-full min-h-screen overflow-hidden">
-      {/* Background Image */}
-      {/* <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/reel-section.png"
-          alt="Any Platform Any video"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-      </div> */}
+<div className="min-h-screen bg-[url('/images/reel-section.png')] max-sm:bg-[url('/images/reel-section-mob.png')] max-sm:bg-bottom bg-no-repeat bg-contain bg-[#FD5A17] relative overflow-hidden">
 
-      {/* Main Content */}
-      <div className="flex flex-col gap-8 items-center px-4 sm:px-8 lg:px-12 pt-24 pb-16">
-
-        {/* Heading */}
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold">
-            Any Platform, Any Quality
+      <div className="container mx-auto px-4 py-11 lg:py-16 relative z-10">
+        <div className="flex flex-col items-center gap-3 mb-8 lg:mb-12">
+          <h1 className="text-black text-center font-adieu text-4xl sm:text-6xl lg:text-[58px] font-normal">
+            Any Platform, Any Quality.
           </h1>
-          <p className="text-sm sm:text-lg mt-2 font-light">
+          <p className="text-black text-center font-questrial text-base sm:text-lg lg:text-[18px] font-light">
             YouTube, Instagram, TikTok... Get the highest resolution media instantly.
           </p>
         </div>
 
-        {/* Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
+        {/* Media Grid */}
+        <div className="relative hisdden mb-12 lg:mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-5 max-w-7xl mx-auto">
+            {/* Left Column - Small images */}
+            <div className="lg:col-span-3 grid grid-cols-1 gap-4 lg:gap-5">
+              <div className="relative aspect-289/380 lg:aspect-289/380">
+                <img
+                  src="/images/Reel.png"
+                  alt="Samsung Presents"
+                  className="w-full h-full object-cover rounded-xl"
+                />
+              </div>
+              <div className="relative aspect-289/232 lg:aspect-289/232">
+                <img
+                  src="/images/reel4.png"
+                  alt="Samsung Presents"
+                  className="w-full h-full object-cover rounded-xl "
+                />
+              </div>
+            </div>
 
-          {/* Left Column */}
-          <div className="grid grid-rows-2 gap-4">
-            <Image
-              src="/images/Reel.png"
-              alt="Any Platform Any video"
-              width={350}
-              height={350}
-              className="w-full h-auto object-cover rounded-lg"
-            />
-            <Image
-              src="/images/reel4.png"
-              alt="Any Platform Any video"
-              width={350}
-              height={350}
-              className="w-full h-auto object-cover rounded-lg"
-            />
+            {/* Middle Column - Medium images */}
+            <div className="lg:col-span-5 grid grid-cols-1 gap-4 lg:gap-5">
+              <div className="relative aspect-427/240 lg:aspect-427/240">
+                <img
+                  src="https://api.builder.io/api/v1/image/assets/TEMP/ce785a1dc3cd2a1663ef24b93eb7a377b56ca100?width=854"
+                  alt="YouTube Music"
+                  className="w-full h-full object-cover rounded-xl "
+                />
+              </div>
+              <div className="relative aspect-427/370 lg:aspect-427/370">
+                <img
+                  src="https://api.builder.io/api/v1/image/assets/TEMP/75cac0d8e58a985e7c7aa327cf874ae442fe15b3?width=854"
+                  alt="Galaxy A"
+                  className="w-full h-full object-cover rounded-xl "
+                />
+              </div>
+            </div>
+
+            {/* Right Column - Tall image */}
+            <div className="lg:col-span-4">
+              <div className="relative aspect-360/640 lg:aspect-360/640">
+                <img
+                  src="https://api.builder.io/api/v1/image/assets/TEMP/e5b7da04065d5744774cff7cac9c444cbaf512a0?width=720"
+                  alt="YouTube Shorts"
+                  className="w-full h-full object-cover rounded-xl "
+                />
+              </div>
+            </div>
           </div>
-
-          {/* Middle Column */}
-          <div className="flex flex-col gap-4">
-            <Image
-              src="/images/reel2.png"
-              alt="Any Platform Any video"
-              width={450}
-              height={450}
-              className="w-full h-auto object-cover rounded-lg"
-            />
-            <Image
-              src="/images/reel5.png"
-              alt="Any Platform Any video"
-              width={450}
-              height={450}
-              className="w-full h-auto object-cover rounded-lg"
-            />
-          </div>
-
-          {/* Right Column */}
-          <div className="grid grid-rows-2 gap-4">
-            <Image
-              src="/images/reel3.png"
-              alt="Any Platform Any video"
-              width={380}
-              height={380}
-              className="w-full h-auto object-cover rounded-lg"
-            />
-          </div>
-
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
