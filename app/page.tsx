@@ -63,9 +63,10 @@ export default function Home() {
           </div>
 
           <div className="absolute top-8 md:top-0 left-1/2 -translate-x-1/2 w-24 md:w-32 h-24 md:h-32 opacity-90">
-            <img
+            <Image
               src="/icons/insta.png"
               alt=""
+              fill
               className="w-full h-full object-contain -rotate-14"
             />
           </div>
