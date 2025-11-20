@@ -63,10 +63,10 @@ export default function Home() {
           </div>
 
           <div className="absolute top-8 md:top-0 left-1/2 -translate-x-1/2 w-24 md:w-32 h-24 md:h-32 opacity-90">
-            <Image
-              src="/icons/insta.png"
+            <img
+              src="https://github.com/AnasAAhmed/tog-landing-page/blob/main/public/icons/Insta.png?raw=true"
               alt=""
-              fill
+              
               className="w-full h-full object-contain -rotate-14"
             />
           </div>
@@ -79,7 +79,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="absolute bottom-0 left-[550px] w-32 md:w-48 h-32 md:h-48 opacity-90">
+          <div className="absolute bottom-0 sm:left-[550px] w-32 md:w-48 h-32 md:h-48 opacity-90">
             <img
               src="/icons/d-arrow.png"
               alt=""
@@ -182,13 +182,13 @@ export default function Home() {
       </section> */}
       <ReelSection />
       {/* How it works / Blogs section */}
-      <section className="px-4 pb-16 md:pb-24">
+      {/* <section className="px-4 pb-16 md:pb-24">
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/48789abd1329682477ff6e7f69606fa7a7f4742f?width=2560"
           alt="How it works and Blog section"
           className="w-full max-w-7xl mx-auto"
         />
-      </section>
+      </section> */}
 
       {/* Footer */}
       <Footer />
