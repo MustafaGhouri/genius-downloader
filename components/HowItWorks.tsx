@@ -35,12 +35,12 @@ export default function HowItWorks() {
     bg-size-[1200px_auto]         
     sm:bg-size-[1200px_auto]    
     lg:bg-size-[1400px_auto]">
-      <div className="relative w-full max-sw-[1280px] mx-auto px-4 sm:px-8 lg:px-20 py-8 md:py-16 lg:py-20">
+      <div className="relative w-full px-4 sm:px-8 lg:px-20 py-8 md:py-16 lg:py-20">
 
 
         <div className="flex flex-col items-center justify-center lg:flex-row gap-6 md:gap-8 my-8 md:my-12 lg:my-16">
 
-          <div className="w-full lg:min-w-[363px]">
+          <div className="w-full lg:misn-w-[3s63px]">
             <div
               className="bg-[#FD5A17] rounded-xl border-2 border-black/50 p-8 md:p-10 lg:p-9"
               style={{ boxShadow: '8px 8px 0 0 #000' }}
@@ -68,7 +68,7 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          <div className="w-full lg:flex-1 relative">
+          <div className="w-full max-w-200 lg:flex-1 relative">
             <div
               className="bg-[#FD5A17] rounded-xl border-2 border-black/50 py-8 md:py-10 lg:py-14"
               style={{ boxShadow: '8px 8px 0 0 #000' }}
