@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 const Hero = () => {
     return (
-        <section className="relative overflow-x-hidden bg-s[url('/images/hero.png')] bg-[#FD5A17] pt-30 pb-24 md:pb-36 psx-4">
-            <div className="absolute top-10 md:top-24 left-0 md:left-16 w-20 md:w-28 h-20 md:h-28 opacity-90">
+        <section className="relative overflow-hidden bg-s[url('/images/hero.png')] bg-[#FD5A17] pt-30 pb-24 md:pb-36 psx-4">
+            <div className="absolute top-10 md:top-18 left-0 md:left-16 w-20 md:w-36 h-20 md:h-36 opacity-90">
                 <Image
                     src="/icons/tiktok.png"
                     alt="insta"
@@ -32,7 +32,7 @@ const Hero = () => {
                 />
             </div>
 
-            <div className="absolute bottom-0 left-1/2 w-32 md:w-48 h-32 md:h-48 -translate-x-1/2 opacity-90">
+            <div className="absolute -bottom-6 left-1/2 w-32 md:w-60 h-32 md:h-60 -translate-x-1/2 opacity-90">
                 <Image
                     src="/icons/d-arrow.png"
                     alt="d-arroe"
@@ -40,7 +40,7 @@ const Hero = () => {
                     className="object-contain "
                 />
             </div>
-            <div className="hidden lg:block absolute w-48 lg:w-100 h-48 lg:h-100 top-12 md:top-24 -right-24 opacity-90">
+            <div className="hidden lg:block absolute w-48 lg:w-110 h-48 lg:h-110 top-12 md:top-24 -right-24 opacity-90">
 
                 <Image
                     src="/icons/d-arrow2.png"
@@ -59,7 +59,7 @@ const Hero = () => {
             </div>
 
 
-            <div className="absolute bottom-0 md:bottom-24 left-0 md:left-32 w-16 md:w-28 h-16 md:h-28 opacity-90">
+            <div className="absolute bottom-0 md:bottom-16 left-0 md:left-32 w-16 md:w-28 h-16 md:h-28 opacity-90">
                 <Image
                     src="/icons/youtube.png"
                     alt="youtube"
@@ -68,7 +68,7 @@ const Hero = () => {
                 />
             </div>
 
-            <div className="absolute bottom-0 md:bottom-8 right-0 md:right-24 w-28 md:w-48 h-28 md:h-48 opacity-90">
+            <div className="absolute bottom-0 md:bottom-8 right-0 md:right-24 w-28 md:w-52 h-28 md:h-52 opacity-90">
                 <Image
                     src="/icons/facebook.png"
                     alt="youtube"
