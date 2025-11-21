@@ -84,7 +84,7 @@ const Hero = () => {
                     Zero Trouble.
                 </h1>
 
-                <p style={{fontFamily:'var(--font-questrial)'}}  className="font-body text-base md:text-lg text-black leading-relaxed mb-8 md:mb-12 max-ws-3xl mx-auto">
+                <p style={{fontFamily:'var(--font-questrial)'}}  className="font-body mx-4 text-base md:text-lg text-black leading-relaxed mb-8 md:mb-12 max-ws-3xl mx-auto">
                     Download videos from YouTube, Instagram, TikTok, Facebook and more
                     — fast, clean, and always in HD
                 </p>

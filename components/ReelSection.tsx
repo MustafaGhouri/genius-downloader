@@ -9,7 +9,7 @@ const ReelSection = () => {
           <h1 className="text-black text-center font-adieu text-4xl sm:text-6xl lg:text-[58px] font-normal">
             Any Platform, Any Quality.
           </h1>
-          <p className="text-black text-center font-questrial text-base sm:text-lg lg:text-[18px] font-light">
+          <p style={{fontFamily:'var(--font-questrial)'}}   className="text-black text-center font-questrial text-base sm:text-lg lg:text-[18px] font-light">
             YouTube, Instagram, TikTok... Get the highest resolution media instantly.
           </p>
         </div>
@@ -25,7 +25,7 @@ const ReelSection = () => {
                   className="w-full h-full object-cover rounded-xl"
                 />
               </div>
-              <div style={{ boxShadow: '8px 8px 0 0 #FFC803' }} className="border-gray-900 border-2 rounded-xl relative aspect-289/232 lg:aspect-210/226">
+              <div style={{ boxShadow: '8px 8px 0 0 #FFC803' }} className="border-gray-900 lg:border-2 rounded-2xl relative max-sm:mr-2 aspect-289/232 lg:aspect-210/226">
                 <Image
                   fill
                   src="/images/reel4.png"
