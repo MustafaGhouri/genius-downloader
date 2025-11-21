@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Header() {
@@ -10,13 +11,13 @@ export default function Header() {
         <div className="rounded-2xl bg-[rgba(255,88,1,0.04)] backdrop-blur-sm">
           <div className="flex items-center justify-between px-6 md:px-20 py-4">
 
-            <div className="shrink-0">
+            <Link href={'/'} className="shrink-0">
               <img
                 src="/icons/logo.png"
                 alt="Genius"
                 className="h-16 md:h-[70px] w-auto"
               />
-            </div>
+            </Link>
 
             <nav className="hidden md:flex items-center gap-8 lg:gap-12">
               <a
