@@ -33,7 +33,7 @@
   }
 
   .btn-animated:hover .btn-text {
-    @apply text-[#183153];
+    @apply text-black;
     animation: scaleUp 0.3s ease-in-out;
   }
 

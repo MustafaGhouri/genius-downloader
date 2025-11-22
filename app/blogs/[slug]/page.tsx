@@ -6,6 +6,70 @@ import { blogs } from "@/lib/constants";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
+  const Param = await props.params;
+
+  const blog = blogs.find((i) => i.slug === Param.slug)
+  if (!blog) {
+    return notFound();
+  }
+
+  if (!blog) return {
+    title: "blog 404 Not Found | Genius Dwonloader",
+    description: "No such blog exists at Genius Dwonloader",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true
+      }
+    },
+    openGraph: {
+      title: "blog 404 Not Found | Genius Dwonloader",
+      description: "No such blog exists at Genius Dwonloader",
+      images: [
+        {
+          url: '/404.png',
+          width: 1024,
+          height: 768,
+          alt: '404 Not Found',
+        },
+      ],
+      site_name: 'Borcelle',
+    },
+  };
+
+  return {
+    title: `${blog.title} | Genius Downloader`,
+    // description: blog.description || "Shop high-quality products at Borcelle.",
+    // keywords: blog.tags?.join(', ') ?? '',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true
+      }
+    },
+    openGraph: {
+      title: `${blog.title} | Genius Downloader`,
+      // description: product.description || "Shop high-quality products at Borcelle.",
+      url: `${process.env.APP_URL}/blogs/${blog.slug}`,
+      images: [
+        {
+          url: blog.image || 'fallback-banner.webp',
+          width: 1024,
+          height: 768,
+          alt: blog.title,
+        },
+      ],
+      site_name: 'Genius_Downloader',
+    },
+  };
+}
+
+
 export default async function BlogDetail({ params }: { params: Promise<{ slug: string }> }) {
   const Param = await params;
 
@@ -21,16 +85,19 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
         <Link
           // onClick={() => router.back()}
           href={'/#how-it-works'}
-          className="bg-[#FD5A17] border-2 border-black rounded-xl px-6 py-3 font-bold text-lg inline-flex items-center gap-3 mb-8 hover:-translate-y-0.5 transition-transform"
-          style={{ boxShadow: '4px 4px 0 0 #000' }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+          {/* <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
             <path d="M19 12H5M5 12L12 19M5 12L12 5" />
           </svg>
-          Back to Blogs
+          Back to Blogs */}
+          <button className="mb-8 btn-animated min-w-[120px] sm:min-w-[150px] md:min-w-[180px] rounded py-[13px] font-body text-base text-[10px] sm:text-lg md:text-xl">
+            <span className="btn-text inline-flex items-center gap-3 px-3">  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+              <path d="M19 12H5M5 12L12 19M5 12L12 5" />
+            </svg>
+              Back to Home</span>
+          </button>
         </Link>
 
-        {/* Blog Header */}
         <div
           className="bg-[#FD5A17] border-2 border-black/50 rounded-xl p-8 md:p-12 mb-8"
           style={{ boxShadow: '8px 8px 0 0 #000' }}
@@ -69,7 +136,6 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
           </div>
         </div>
 
-        {/* Featured Image */}
         <div
           className="bg-[#FD5A17] aspect-video border-2 border-black/50 rounded-xl p-6 md:p-8 mb-8"
           style={{ boxShadow: '8px 8px 0 0 #000' }}
@@ -80,7 +146,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
             className="w-full h-full object-cover"
           />
         </div>
-        {/* Content Section */}
+
         <div
           className="bg-[#FD5A17] border-2 border-black/50 rounded-xl p-8 md:p-12 mb-8"
           style={{ boxShadow: '8px 8px 0 0 #000' }}
