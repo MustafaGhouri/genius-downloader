@@ -1,11 +1,11 @@
 import Image from "next/image";
-import MotionDiv from "./ui/MotionWrapper";
-import SplitText from "./ui/split-effect";
+import MotionDiv from "../ui/MotionWrapper";
+import SplitText from "../ui/split-effect";
 
 const ReelSection = () => {
   return (
-    <div className="min-h-screen bg-[url('/images/reel-section.png')] max-sm:bg-[url('/images/reel-section-mob.png')] max-sm: bg-bottom bg-no-repeat bg-contain bg-[#FD5A17] relative overflow-hidden">
-
+    <div className="min-h-screen bdg-[url('/images/reel-section.png')] madx-sm:bg-[url('/images/reel-section-mob.png')] max-sm: bg-bottom bg-no-repeat bg-contain bg-[#FD5A17] relative overflow-hidden">
+    
       <div className="container mx-auto px-4 py-11 lg:py-16 relative z-10">
         <div className="flex flex-col items-center gap-3 mb-8 lg:mb-12">
 

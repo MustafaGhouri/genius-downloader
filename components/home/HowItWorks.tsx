@@ -2,8 +2,8 @@
 
 
 import { blogs } from "@/lib/constants";
-import Link from "next/link";
 import { useRef } from "react";
+import { BlogCard } from "../home/BlogCard";
 
 export default function HowItWorks() {
 
@@ -72,27 +72,7 @@ export default function HowItWorks() {
                   className="flex gap-4 max-sm:ml-8 justify-around items-stretch md:gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
 
                   {[...blogs, ...blogs].map((i, _) => (
-                    <Link href={`/blogs/${i.slug}`} key={_} className="min-w-52 sm:min-w-[278px] snap-start">
-                      <div className="bg-black rounded-lg border border-black overflow-hidden h-full flex flex-col">
-
-                        <div className="bg-[#FFC803] p-4 sm:p-9 border-b border-white">
-                          <div className="h-40 bg-white rounded-xl border-2 border-black overflow-hidden">
-                            <img
-                              src={i.image}
-                              alt="Blog thumbnail"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="p-4 bg-black grow flex items-center">
-                          <p style={{ fontFamily: 'var(--font-poppins)' }} className="font-poppins font-medium text-[18px] leading-[29.15px] tracking-[-0.71px] text-white text-center capitalize">
-                            {i.title}
-                          </p>
-                        </div>
-
-                      </div>
-                    </Link>
+                   <BlogCard key={_} blog={i} index={_}/>
                   ))}
                 </div>
 

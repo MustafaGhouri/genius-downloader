@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Poppins, Questrial } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/home/Header";
+import Footer from "@/components/home/Footer";
 
 
 const questrial = Questrial({
@@ -28,7 +28,7 @@ const ghuthen = localFont({
 export const metadata: Metadata = {
   title: "Genius Downloader",
   description: "One Tool. Every Video.Zero Trouble. Download videos from YouTube, Instagram, TikTok, Facebook and more — fast, clean, and always in HD.",
-  icons:{icon:'/icons/logo.png'},
+  icons:{icon:'/images/footer-logo.png'},
   openGraph: {
     title: "Genius Downloader",
     description: "One Tool. Every Video.Zero Trouble. Download videos from YouTube, Instagram, TikTok, Facebook and more — fast, clean, and always in HD.",

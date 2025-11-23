@@ -34,6 +34,8 @@
 
   .btn-animated:hover .btn-text {
     @apply text-black;
+  }
+  .btn-animated:active {
     animation: scaleUp 0.3s ease-in-out;
   }
 
@@ -169,37 +171,128 @@
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 3s ease-out infinite;
 }
 
-.btn-japanese {
-  background-color: var(--foreground);
-  color: white;
-  border: none;
-  /* border-radius: 0.25rem; */
-  padding: 0.5rem 1.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--y, 10px));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    scale: 1;
+  }
 }
 
-.btn-japanese:hover {
-  background-color: var(--accent-foreground);
+.split-text-item {
+  opacity: 0;
+  animation-delay: 0.1s;
+  animation-name: fadeUp;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 }
 
-.btn-japanese:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: rgba(185, 185, 185, 0.363);
-  transition: width 0.3s ease;
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
-.btn-japanese:hover:before {
-  width: 100%;
+.h1-fade {
+  opacity: 0;
+  animation-name: fadeUp;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-duration: 0.3s;
+  animation-delay: 0.1s;
+  will-change: opacity, transform;
+
+}
+
+.h2-fade {
+  opacity: 0;
+  animation-name: fadeUp;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-duration: 0.3s;
+  animation-delay: 0.2s;
+  will-change: opacity, transform;
+  scale: 0.97;
+
+}
+
+.p-fade {
+  opacity: 0;
+  animation-name: fade;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-duration: 0.3s;
+  animation-delay: 0.3s;
+  will-change: opacity, transform;
+
+}
+
+.btns-fade {
+  opacity: 0;
+  animation-name: fade;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-duration: 0.3s;
+  will-change: opacity, transform;
+  animation-delay: 0.5s;
+}
+
+.img-fadeUp {
+  opacity: 0;
+  scale: 0.5;
+  will-change: opacity, transform;
+  animation-name: fadeUp;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-duration: 0.3s;
+  animation-delay: 0.7s;
+}
+@keyframes appear {
+  from{
+    opacity: 0;
+    scale: 0.5;
+  }
+
+ to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.cardr {
+  animation:appear linear;
+  /* animation-timeline: view();
+  animation-range: entry, 0; */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .split-text-item {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.responsive-filter {
+  filter: blur(5px);
+}
+
+@media only screen and (max-width: 600px) {
+  .responsive-filter {
+    filter: blur(0px);
+  }
 }

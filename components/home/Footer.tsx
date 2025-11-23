@@ -12,7 +12,7 @@ const Footer = () => {
                             alt="GENIUS"
                             width={80}
                             height={80}
-                            className="h-20 w-20"
+                            className=""
                         />
                         <div className="flex items-center gap-6 md:gap-7">
                             <Link
