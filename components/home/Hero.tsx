@@ -216,9 +216,9 @@ const Hero = () => {
                 {/* Preview */}
                 {mediaUrl && (
                     <>
-                        <div id='video-preview' className="flex pb-18 my-5 flexs-col items-center justify-center gap-5 p-6 rounded-md bg-white/10 backdrop-blur-md border border-white/20 shadow-lg w-full max-w-xl mx-auto">
+                        <div id='video-preview' className="flex pb-18 my-5 flexs-col items-center justify-center gap-5 p-2 rounded-md bg-white/10 backdrop-blur-md border border-white/20 shadow-lg w-full max-w-2xl mx-auto">
 
-                            <div className="relative w-full max-w-md mx-auto aspect-[4/3] bg-black rounded-md overflow-hidden shadow-md">
+                            <div className="relative  w-full max-w-md mx-auto aspect-[4/3] bg-black rounded-md overflow-hidden shadow-md">
 
                                 <video
                                     ref={videoRef}
@@ -231,7 +231,7 @@ const Hero = () => {
                                     className="absolute inset-0 flex items-center justify-center cursor-pointer"
                                 >
                                     {!isPlaying && (
-                                        <div className="bg-black/50 p-4 rounded-full backdrop-blur-sm transition-all hover:bg-black/60">
+                                        <div className="bg-gray-600/50 p-4 rounded-full backdrop-blur-sm transition-all hover:bg-black/60">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 className="h-12 w-12 text-white"
@@ -244,7 +244,7 @@ const Hero = () => {
                                     )}
                                 </div>
                             </div>
-                            <div className=' w-full'>
+                            <div className=' w-full '>
                                 <div className="flex w-full flex-col gap-4">
 
                                     <button
