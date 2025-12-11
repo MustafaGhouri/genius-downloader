@@ -42,13 +42,29 @@ export const mediaUrlSchema = z.object({
 const Hero = () => {
     const [urlInput, setUrlInput] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [fileSize, setFileSize] = useState('');
+    const [fileDuration, setFileDuration] = useState(0);
     const [downloadLoading, setDownloadLoading] = useState(false);
     const [mediaUrl, setMediaUrl] = useState('');
-    const videoRef = useRef<HTMLDivElement | null>(null);
-    
+
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        if (!videoRef.current) return;
+
+        if (videoRef.current.paused) {
+            videoRef.current.play();
+            setIsPlaying(true);
+        } else {
+            videoRef.current.pause();
+            setIsPlaying(false);
+        }
+    };
     useEffect(() => {
         if (mediaUrl && videoRef.current) {
             videoRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+            getFileDetails(mediaUrl)
         }
     }, [mediaUrl])
 
@@ -86,7 +102,7 @@ const Hero = () => {
                 setErrorMessage(data?.error || res.statusText)
             }
             setMediaUrl(data.media_url);
-            // downloadFile(data.media_url)
+            getFileDetails(data.media_url)
         } catch (error) {
             console.log(error)
             setErrorMessage((error as Error).message)
@@ -113,6 +129,34 @@ const Hero = () => {
         }
     }
 
+    async function getFileDetails(url: string) {
+        if (!url) return;
+
+        try {
+            const res = await fetch(url);
+            const blob = await res.blob();
+
+            const sizeInBytes = blob.size;
+            const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2);
+            setFileSize(sizeInMB)
+            const videoEl = document.createElement("video");
+            videoEl.preload = "metadata";
+
+            const objectUrl = URL.createObjectURL(blob);
+            videoEl.src = objectUrl;
+
+            videoEl.onloadedmetadata = () => {
+                const duration = videoEl.duration;
+                setFileDuration(duration)
+                URL.revokeObjectURL(objectUrl);
+            };
+
+
+        } catch (error) {
+            console.error(error);
+            setErrorMessage((error as Error).message);
+        }
+    }
     return (
         <section className="relative overflow-hidden bg-s[url('/images/hero.png')] bg-[#FD5A17] pt-30 pb-24 md:pb-36 psx-4">
             <BackgroundCircles />
@@ -151,12 +195,6 @@ const Hero = () => {
                 </p>
                 <form onSubmit={handleSubmit} className="flex btns-fade flex-row items-center justify-center gap-3 md:gap-5 max-w-3xl w-full max-sm:px-2 mx-auto">
 
-                    <button
-                        type='submit'
-                        disabled={downloadLoading}
-                        className="hidden md:flex justify-center items-center btn-animated min-w-[120px] sm:min-w-[150px] md:min-w-[180px] rounded py-3.5 sm:py-[22px] font-body text-base text-[10px]  gap-1 sm:text-lg md:text-xl">
-                        <span className="btn-text mx-2 flex items-center justify-center gap-2">Download {downloadLoading ? <Loader className='animate-spin' /> : ''}</span>
-                    </button>
                     <div onSubmit={handleSubmit} className="relative flex-1 w-auto">
                         <input
                             type="text"
@@ -168,59 +206,77 @@ const Hero = () => {
                             }}
                         />
                     </div>
+                    <button
+                        type='submit'
+                        disabled={downloadLoading}
+                        className="hidden md:flex justify-center items-center btn-animated min-w-[120px] sm:min-w-[150px] md:min-w-[180px] rounded py-3.5 sm:py-[22px] font-body text-base text-[10px]  gap-1 sm:text-lg md:text-xl">
+                        <span className="btn-text mx-2 flex items-center justify-center gap-2">Download {downloadLoading ? <Loader className='animate-spin' /> : ''}</span>
+                    </button>
                 </form>
+                {/* Preview */}
                 {mediaUrl && (
-                    <div  ref={videoRef} id='video-preview' className="flex my-5 flexs-col items-center justify-center gap-5 p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl w-full max-w-xl mx-auto">
+                    <>
+                        <div id='video-preview' className="flex pb-18 my-5 flexs-col items-center justify-center gap-5 p-6 rounded-md bg-white/10 backdrop-blur-md border border-white/20 shadow-lg w-full max-w-xl mx-auto">
 
-                        <div className="relative w-full rounded-xl overflow-hidden shadow-lg">
-                            <video
-                                src={mediaUrl}
-                                controls
-                                className="w-full h-auto rounded-xl"
-                            // poster="/images/video-placeholder.png"
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <div className="bg-black/40 p-4 rounded-full backdrop-blur-sm transition-opacity group-hover:opacity-0">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-10 w-10 text-white"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor"
-                                    >
-                                        <path d="M8 5v14l11-7z" />
-                                    </svg>
+                            <div className="relative w-full max-w-md mx-auto aspect-[4/3] bg-black rounded-md overflow-hidden shadow-md">
+
+                                <video
+                                    ref={videoRef}
+                                    src={mediaUrl}
+                                    className="w-full h-full object-cover object-top rounded-md"
+                                />
+
+                                <div
+                                    onClick={togglePlay}
+                                    className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                                >
+                                    {!isPlaying && (
+                                        <div className="bg-black/50 p-4 rounded-full backdrop-blur-sm transition-all hover:bg-black/60">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-12 w-12 text-white"
+                                                fill="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <div className="flex flex-col gap-4">
-                                <button
-                                    onClick={() => downloadFile(mediaUrl)}
-                                    className="px-5 py-2 rounded-lg bg-white text-black font-semibold shadow-md hover:bg-gray-200 transition"
-                                >
-                                    Download
-                                </button>
+                            <div className=' w-full'>
+                                <div className="flex w-full flex-col gap-4">
 
-                                <a
-                                    href={mediaUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-5 py-2 rounded-lg bg-black text-white font-semibold shadow-md hover:bg-black transition"
-                                >
-                                    Open in New Tab
-                                </a>
+                                    <button
+                                        onClick={() => downloadFile(mediaUrl)}
+                                        className="block px-5 py-2.5 text-sm md:text-[15px] font-normal tracking-wide btn-animated">
+                                        <span className="btn-text">Download</span>
+                                    </button>
+                                    <a
+                                        href={mediaUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-5 py-2 rounded-lg bg-white text-black font-semibold shadow-md hover:bg-white transition"
+                                    >
+                                        Open in New Tab
+                                    </a>
+                                </div>
                             </div>
-                            <p className="text-white/80 my-2 text-sm text-center break-all max-w-full">
-                                {mediaUrl}
-                            </p>
+                            {fileDuration > 0 && fileSize !== '' && < div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-row gap-3 bg-black/50 px-2 py-1 rounded-full text-white text-sm font-medium backdrop-blur-sm shadow-md">
+                                {fileDuration !== null && (
+                                    <p className="m-0">Duration: {fileDuration?.toString()}s</p>
+                                )}
+                                {fileSize !== null && <p className="m-0">Size: {fileSize} MB</p>}
+                            </div>}
+
                         </div>
-                    </div>
+                    </>
                 )}
 
                 {errorMessage && <p className='text-white'>{errorMessage}</p>}
 
             </div>
-        </section>
+        </section >
     )
 }
 
