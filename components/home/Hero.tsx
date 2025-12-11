@@ -47,6 +47,10 @@ const Hero = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        if (!urlInput) {
+            setErrorMessage('Provide Url first')
+            return
+        };
         const parsedUrl = mediaUrlSchema.safeParse({ url: urlInput });
         if (parsedUrl.error) {
             let messages = ''
@@ -58,6 +62,8 @@ const Hero = () => {
             return;
         }
         try {
+            setDownloadLoading(true)
+
             const res = await fetch('https://mariachug.com/api/media/download/', {
                 method: "POST",
                 body: JSON.stringify({ media_url: parsedUrl.data.url }),
@@ -74,14 +80,12 @@ const Hero = () => {
         } catch (error) {
             console.log(error)
         }
+        finally {
+            setDownloadLoading(false)
+        }
     }
     async function downloadFile(url: string) {
-        if (!url) {
-            setErrorMessage('Provide Url first')
-            return
-        };
         try {
-            setDownloadLoading(true)
             const res = await fetch(url);
             const blob = await res.blob();
             const a = document.createElement("a");
@@ -92,10 +96,6 @@ const Hero = () => {
         } catch (error) {
             setErrorMessage((error as Error).message)
             console.log(error);
-
-        } finally {
-            setDownloadLoading(false)
-
         }
     }
 
@@ -138,11 +138,10 @@ const Hero = () => {
                 <form onSubmit={handleSubmit} className="flex btns-fade flex-row items-center justify-center gap-3 md:gap-5 max-w-3xl w-full max-sm:px-2 mx-auto">
 
                     <button
-                        onClick={() => downloadFile(mediaUrl)}
-                        type='button'
+                        type='submit'
                         disabled={downloadLoading}
                         className="hidden md:flex justify-center items-center btn-animated min-w-[120px] sm:min-w-[150px] md:min-w-[180px] rounded py-3.5 sm:py-[22px] font-body text-base text-[10px]  gap-1 sm:text-lg md:text-xl">
-                        <span className="btn-text mx-2 flex items-center justify-center gap-1">Download {downloadLoading ? <Loader className='animate-spin' /> : ''}</span>
+                        <span className="btn-text mx-2 flex items-center justify-center gap-2">Download {downloadLoading ? <Loader className='animate-spin' /> : ''}</span>
                     </button>
                     <div onSubmit={handleSubmit} className="relative flex-1 w-auto">
                         <input
@@ -159,7 +158,7 @@ const Hero = () => {
                         </button>
                     </div>
                 </form>
-                {mediaUrl && <div className='flex flex-col items-center justify-center'>
+                {mediaUrl && <div className='flex flex-col gap-3 items-center justify-center'>
                     <p className='text-white'>{mediaUrl}</p>
                     <button onClick={() => downloadFile(mediaUrl)} className='bg-black text-white px-4 py-2 rounded-md'>Download</button>
                     <a href={mediaUrl} download className='bg-black text-white px-4 py-2 rounded-md' target='_blank' rel='noopener noreferrer'>Download Link</a>
