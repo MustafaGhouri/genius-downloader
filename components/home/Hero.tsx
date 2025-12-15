@@ -73,7 +73,8 @@ const Hero = () => {
         if (!urlInput) {
             setErrorMessage('Provide Url first')
             return
-        };
+        } else setErrorMessage('');
+
         const parsedUrl = mediaUrlSchema.safeParse({ url: urlInput });
         if (parsedUrl.error) {
             let messages = ''
@@ -83,7 +84,8 @@ const Hero = () => {
             setErrorMessage(messages)
 
             return;
-        }
+        } else setErrorMessage('');
+
         try {
             setDownloadLoading(true)
 
@@ -100,7 +102,7 @@ const Hero = () => {
             const data = await res.json();
             if (!res.ok) {
                 setErrorMessage(data?.error || res.statusText)
-            }
+            } else setErrorMessage('');
             setMediaUrl(data.media_url);
             getFileDetails(data.media_url)
         } catch (error) {
@@ -135,6 +137,9 @@ const Hero = () => {
         try {
             const res = await fetch(url);
             const blob = await res.blob();
+            if (res.ok) {
+                setErrorMessage('')
+            }
 
             const sizeInBytes = blob.size;
             const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2);
@@ -151,10 +156,9 @@ const Hero = () => {
                 URL.revokeObjectURL(objectUrl);
             };
 
-
         } catch (error) {
             console.error(error);
-            setErrorMessage((error as Error).message);
+            setErrorMessage('Failed to get video details: ' + (error as Error).message);
         }
     }
     return (
@@ -173,7 +177,7 @@ const Hero = () => {
                         mode={'words'}
                         className="text-5xl max-w-5xl sm:text-6xl md:text-7xl lg:text-[119px] font-bold text-black leading-[0.95] tracking-wide mb-4 md:mb-6 [text-shadow:1px_1px_0_#000]"
                         itemClassName="mx-[1px]"
-                        delayPerItem={0.02}
+                        delayPerItem={0.03}
                         duration={0.2}
                         y={12}
                     />

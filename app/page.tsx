@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero";
 import HowItWorks from "@/components/home/HowItWorks";
 import ReelSection from "@/components/home/ReelSection";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -14,14 +15,14 @@ export default function Home() {
             We dislike ads as much as you. Please help us making the website
             ad-free, while continuing to provide high quality service.
           </p>
-          <button className="cursor-pointer hover:scale-[97%] duration-300 transition-all inline-flex items-center justify-center rounded border border-brand-gray-dark bg-white px-9 py-3 hover:bg-gray-100">
+          <Link href={"https://ko-fi.com/geniusdownloader"} target="_blank" className="cursor-pointer hover:scale-[97%] duration-300 transition-all inline-flex items-center justify-center rounded border border-brand-gray-dark bg-white px-9 py-3 hover:bg-gray-100">
             <Image
               height={220}
               width={220}
               src="/icons/coffee.png"
               alt="Buy me a coffee"
             />
-          </button>
+          </Link>
 
         </section>
 
